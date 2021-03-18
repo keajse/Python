@@ -1,0 +1,1 @@
+#Un profesor necesita obtener el nombre de cada estudiante y sus 5 respectivas notas y debe mostrar la lsta de los estudiantes con su respectiva nota final.
