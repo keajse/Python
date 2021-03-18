@@ -28,30 +28,38 @@ countStudents = 0
 averageAge = 0
 countWomen = 0
 countMen = 0
-menu = input("¿Qué desea hacer? - admision(admi) - matrícula(matri)")
-if menu == "admi":
-    numAlumnos = int(input("Ingrese número de alumnos"))
+countNotBinary = 0
+
+menu = input("¿Qué desea hacer? - admision(admi) - matrícula(matri): ")
+mMenu = menu.upper()
+
+if mMenu == "ADMI":
+    numAlumnos = int(input("Ingrese número de alumnos: "))
     for i in range(numAlumnos):
-        name = input("Ingrese nombre")
-        academicProgram = input("Ingrese programa académico -> s - software - t - telecomunicaciones")
-        if academicProgram == "s" or academicProgram == "S":
-            sex = input("Ingrese sexo - m(mujer), h(hombre), nb(no binario)")
-            if sex == "m" or sex == "M":
+        name = input("Ingrese nombre: ")
+        academicProgram = input("Ingrese programa académico -> s - software - t - telecomunicaciones: ")
+        mAcademicProgram = academicProgram.upper()
+        
+        if mAcademicProgram == "S":
+            sex = input("Ingrese sexo - m(mujer), h(hombre), nb(no binario): ")
+            mSex = sex.upper()
+            if mSex == "M":
                 countWomenSoftware+=1
-            elif sex == "h" or sex == "H":
+            elif mSex == "H":
                 countMenSoftware+=1
-            elif sex == "nb" or sex=="NB":
+            elif mSex =="NB":
                 countNotBinarySoftware+=1
             average = averageStudent()
             students.append({"name": name, "average": average})
             averageSoftware+=average
         else:
-            sex = input("Ingrese sexo - m(mujer), h(hombre), nb(no binario)")
-            if sex == "m" or sex == "M":
+            sex = input("Ingrese sexo - m(mujer), h(hombre), nb(no binario): ")
+            mSex = sex.upper()
+            if mSex == "M":
                 countWomenTelecomunications+=1
-            elif sex == "h" or sex == "H":
+            elif mSex == "H":
                 countMenTelecomunications+=1
-            elif sex == "nb" or sex=="NB":
+            elif mSex =="NB":
                 countNotBinarySoftware+=1
             average = averageStudent()
             students.append({"name": name, "average": average})
@@ -73,18 +81,26 @@ if menu == "admi":
 
 else:
     while True:
-        average+=int(input("Ingrese edad"))
-        sex = input("Ingrese sexo")
-        if sex == "m" or sex == "M":
+        average=0
+        average+=int(input("Ingrese edad: "))
+        sex = input("Ingrese sexo: ")
+        mSex = sex.upper()
+        if mSex == "M":
             countWomen+=1
-        elif sex == "h" or sex == "H":
+        elif mSex == "H":
             countMen+=1
-        stopAdmission = input("si desea parar de matricular ingrese 0, de lo contrario cualquier tecla para continuar")
+        elif mSex =="NB":
+            countNotBinary+=1
+        else:
+            print("por favor escoga m - mujer h -hombre nb - no binario")
+        
         countStudents+=1
+        stopAdmission = int(input("Si desea parar de matricular ingrese 0, de lo contrario cualquier tecla para continuar: "))
+        
         if stopAdmission == 0:
             break
 
-    averageAge = averageAge/countStudents
+    averageAge = average/countStudents
     print(f"Número de estudiantes matriculados: {countStudents}")
     print(f"Promedio de edad de matriculados: {averageAge}")
     print(f"Número de mujeres matriculadas: {countWomen}")
